@@ -2,10 +2,11 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
 import { BASE_URL } from '../../static/resources';
 import axios from 'axios';
+import { Country } from '../../types/types';
 
 
 export interface CountriesState {
-  countries: [],
+  countries: Country[],
   status: 'idle' | 'loading' | 'failed',
 }
 

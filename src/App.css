@@ -1,3 +1,33 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
 }
+
+:root{
+  --header-color: #0D52BA;
+  --heart-color: #4051B5;
+  --saved-color: #F50157;
+}
+
+button, a{
+  cursor: pointer;
+}
+
+.flex-centered{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body{
+  padding: .1rem;
+}
+
+.icon{
+  cursor: pointer;
+}
+

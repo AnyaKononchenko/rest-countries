@@ -1,0 +1,54 @@
+.header{
+  background-color: var(--header-color);
+  height: 7vh;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+}
+
+.burger-icon{
+  font-size: 1.8rem;
+  margin-right: 1rem;
+}
+
+/* nav */
+a:link, a:visited {
+  color: white;
+  font-size: 1.3rem;
+}
+
+.header__element:last-child{
+  width: 15%;
+  justify-content: space-between;
+}
+
+.header__element>nav{
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.theme-switch{
+
+  position: relative;
+}
+
+.switch__line{
+  width: 2.7rem;
+  height: 1rem;
+  background-color: #8D3C8B;
+  border-radius: .5rem;
+  position: relative;
+}
+
+.switch__head{
+  width: 1.3em;
+  height: 1.3em;
+  background-color: var(--saved-color);
+  border-radius: 50%;
+  position: absolute;
+  top: -.2rem;
+  right: 0;
+}
