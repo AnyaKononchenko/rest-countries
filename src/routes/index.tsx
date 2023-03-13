@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import { Footer, Header } from '../components';
-import { Home, NotFound } from '../pages';
+import { Home, NotFound, CountriesList, CountryDetails } from '../pages';
 
 const Routes = require("react-router-dom").Routes;
 const Route = require("react-router-dom").Route;
@@ -16,6 +16,8 @@ const Index = () => {
         <main>
           <Routes>
             <Route path='/' element={<Home></Home>} />
+            <Route path='/countries' element={<CountriesList></CountriesList>} />
+            <Route path='/country' element={<CountryDetails></CountryDetails>} />
             <Route path='*' element={<NotFound></NotFound>} />
           </Routes>
         </main>
@@ -25,4 +27,4 @@ const Index = () => {
   )
 }
 
-export default Index
+export default Index;

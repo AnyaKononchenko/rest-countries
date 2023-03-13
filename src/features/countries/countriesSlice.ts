@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
-import { BASE_URL } from '../../static/resources';
+import { BASE_URL } from '../../services/resources';
 import axios from 'axios';
 import { Country } from '../../types/types';
 
@@ -15,16 +15,15 @@ const initialState: CountriesState = {
   status: 'idle',
 }
 
-const fetchCountries = async (endpoint?: string | null) => {
-  endpoint = typeof endpoint === 'undefined' ? null : endpoint;
-  let response = await axios.get(`${BASE_URL}${endpoint ? '/'.concat(endpoint) : ''}`);
+const fetchCountries = async (endpoint: string) => {
+  let response = await axios.get(`${BASE_URL}/${endpoint}`);
   return response;
 }
 
-export const getAllCountries = createAsyncThunk(
-  'countries/getAllCountries',
-  async () => {
-    const response = await fetchCountries();
+export const getCountries = createAsyncThunk(
+  'countries/getCountries',
+  async (endpoint:string) => {
+    const response = await fetchCountries(endpoint);
     return response.data;
   }
 )
@@ -38,14 +37,14 @@ export const countriesSlice = createSlice({
     }
   },
   extraReducers: (builder) => {
-    builder.addCase(getAllCountries.pending, (state) => {
+    builder.addCase(getCountries.pending, (state) => {
       state.status = 'loading';
     })
-    builder.addCase(getAllCountries.fulfilled, (state, action) => {
+    builder.addCase(getCountries.fulfilled, (state, action) => {
       state.status = 'idle';
       state.countries = action.payload;
     })
-    builder.addCase(getAllCountries.rejected, (state) => {
+    builder.addCase(getCountries.rejected, (state) => {
       state.status = 'failed';
     })
   },

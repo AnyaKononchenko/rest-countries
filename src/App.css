@@ -24,10 +24,43 @@ button, a{
 }
 
 body{
-  padding: .1rem;
+  padding: .2rem;
 }
 
 .icon{
   cursor: pointer;
 }
 
+/* home */
+.countries-list{
+  margin-top: 2rem;
+}
+
+/* table */
+
+.country__flag{
+  width: 60%;
+  height: auto;
+  border-radius: 10px;
+  aspect-ratio: 3/2;
+}
+
+.heart-icon,
+.arrow-icon{
+  color: var(--header-color);
+}
+
+.heart-icon{
+  font-size: 1.5rem;
+}
+
+.arrow-icon{
+  font-size: 1.3rem;
+}
+
+
+/* details page*/
+
+.country__card{
+  margin: 1rem auto;
+}

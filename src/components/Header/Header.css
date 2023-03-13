@@ -1,18 +1,6 @@
-.header{
-  background-color: var(--header-color);
-  height: 7vh;
-  color: white;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 2rem;
-}
-
-.burger-icon{
-  font-size: 1.8rem;
-  margin-right: 1rem;
-}
 
 /* nav */
+
 a:link, a:visited {
   color: white;
   font-size: 1.3rem;
@@ -23,32 +11,17 @@ a:link, a:visited {
   justify-content: space-between;
 }
 
-.header__element>nav{
-  width: 60%;
+.links{
+  width: 10%;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  margin-right: 5rem;
 }
 
-.theme-switch{
-
-  position: relative;
-}
-
-.switch__line{
-  width: 2.7rem;
-  height: 1rem;
-  background-color: #8D3C8B;
-  border-radius: .5rem;
-  position: relative;
-}
-
-.switch__head{
-  width: 1.3em;
-  height: 1.3em;
-  background-color: var(--saved-color);
-  border-radius: 50%;
+.switch{
   position: absolute;
-  top: -.2rem;
-  right: 0;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1;
 }
