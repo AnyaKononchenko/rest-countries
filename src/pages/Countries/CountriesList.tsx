@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { getCountries, selectCountries, selectPending, selectError, search, selectSearch } from '../features/countries/countriesSlice';
+
 import { Link } from 'react-router-dom';
+
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { getCountries, selectCountries, selectPending, selectError, search, selectSearch, saveCountry } from '../../features/countries/countriesSlice';
 
 import Table from '@mui/material/Table';
 import TableBody from "@mui/material/TableBody";
@@ -14,10 +16,11 @@ import TextField from '@mui/material/TextField';
 
 import { GoHeart } from 'react-icons/go';
 import { SlArrowRight } from 'react-icons/sl';
-import { Country } from '../types/types';
-import { ENDPOINTS } from '../services/resources';
+import { Country } from '../../types/types';
 
-import { Loading, Error } from '../components';
+import { ENDPOINTS } from '../../services/resources';
+
+import { Loading, Error } from '../../components';
 
 const CountriesList = () => {
   const countries = useAppSelector(selectCountries);
@@ -31,6 +34,7 @@ const CountriesList = () => {
     dispatch(getCountries(ENDPOINTS.all));
   }, [dispatch]);
 
+  // to create a list of languages out of object
   const objectToList = (object: Object) => {
     const values = Object.values(object);
     return (
@@ -40,6 +44,15 @@ const CountriesList = () => {
     );
   }
 
+  const handleSaved = (event: React.MouseEvent<SVGElement, MouseEvent>
+    , country: Country) => {
+    dispatch(saveCountry(country));
+    
+    event.currentTarget.classList.contains('saved') ?
+    event.currentTarget.classList.remove('saved') :
+    event.currentTarget.classList.add('saved');
+  }
+
   const countriesRows = (array: Country[]) => array.map((country: Country, index: number) => (
     <TableRow key={index}>
       <TableCell><img src={country.flags.png} alt={country.flags.alt ? country.flags.alt : `${country.name.common} flag`} className='country__flag' /></TableCell>
@@ -47,7 +60,7 @@ const CountriesList = () => {
       <TableCell>{country.region}</TableCell>
       <TableCell>{country.population}</TableCell>
       <TableCell>{country.languages ? objectToList(country.languages) : ''}</TableCell>
-      <TableCell><GoHeart className='icon heart-icon'></GoHeart></TableCell>
+      <TableCell><GoHeart className='icon heart-icon' onClick={(event) => handleSaved(event, country)}></GoHeart></TableCell>
       <TableCell><Link to='/country' state={country.name.common}><SlArrowRight className='icon arrow-icon'></SlArrowRight></Link></TableCell>
     </TableRow>
   ));

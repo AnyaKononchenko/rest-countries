@@ -10,6 +10,7 @@ export interface CountriesState {
   pending: boolean,
   error: string,
   search: Country[],
+  saved: Country[],
 }
 
 const initialState: CountriesState = {
@@ -17,6 +18,7 @@ const initialState: CountriesState = {
   pending: false,
   error: '',
   search: [],
+  saved: [],
 }
 
 const fetchCountries = async (endpoint: string) => {
@@ -36,6 +38,10 @@ type SearchType = {
   payload: string,
 }
 
+type SavedType = {
+  payload: Country,
+}
+
 export const countriesSlice = createSlice({
   name: 'countries',
   initialState,
@@ -45,6 +51,14 @@ export const countriesSlice = createSlice({
         ...state,
         search: state.countries.filter((country) =>
          country.name.common.toLowerCase().match(action.payload.toLowerCase()))
+      }
+    },
+    saveCountry: (state, action) => {
+      const foundCountry = state.saved.find((country) => country.name.common === action.payload.name.common);
+      if(foundCountry){
+        state.saved = state.saved.filter((country) => country.name.common !== action.payload.name.common);
+      } else {
+        state.saved.push(action.payload);
       }
     }
   },
@@ -64,11 +78,12 @@ export const countriesSlice = createSlice({
   },
 })
 
-export const { search } = countriesSlice.actions;
+export const { search, saveCountry } = countriesSlice.actions;
 
 export const selectCountries = (state: RootState) => state.countries.countries;
 export const selectPending = (state: RootState) => state.countries.pending;
 export const selectError = (state: RootState) => state.countries.error;
 export const selectSearch = (state: RootState) => state.countries.search;
+export const selectSaved = (state: RootState) => state.countries.saved;
 
 export default countriesSlice.reducer;

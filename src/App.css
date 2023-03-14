@@ -9,7 +9,6 @@
 
 :root{
   --header-color: #0D52BA;
-  --heart-color: #4051B5;
   --saved-color: #F50157;
 }
 
@@ -58,6 +57,9 @@ body{
   font-size: 1.3rem;
 }
 
+.saved{
+  color: var(--saved-color);
+}
 
 /* details page*/
 

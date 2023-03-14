@@ -3,9 +3,9 @@ import { IconButtonProps, IconButton, Card, CardHeader, Avatar, CardMedia, CardC
 import { red } from '@mui/material/colors';
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from '../app/hooks';
-import { getCountries, selectCountries } from '../features/countries/countriesSlice';
-import { ENDPOINTS } from '../services/resources';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { getCountries, selectCountries } from '../../features/countries/countriesSlice';
+import { ENDPOINTS } from '../../services/resources'; 
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowLeft, MdOutlineMoreVert, MdLocationPin } from 'react-icons/md'
 import { current } from '@reduxjs/toolkit';
 
