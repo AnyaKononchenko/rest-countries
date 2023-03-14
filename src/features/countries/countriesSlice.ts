@@ -7,12 +7,16 @@ import { Country } from '../../types/types';
 
 export interface CountriesState {
   countries: Country[],
-  status: 'idle' | 'loading' | 'failed',
+  pending: boolean,
+  error: string,
+  search: Country[],
 }
 
 const initialState: CountriesState = {
   countries: [],
-  status: 'idle',
+  pending: false,
+  error: '',
+  search: [],
 }
 
 const fetchCountries = async (endpoint: string) => {
@@ -28,24 +32,34 @@ export const getCountries = createAsyncThunk(
   }
 )
 
+type SearchType = {
+  payload: string,
+}
+
 export const countriesSlice = createSlice({
   name: 'countries',
   initialState,
   reducers: {
-    search: (state) => {
-
+    search: (state, action: SearchType) => {
+      return {
+        ...state,
+        search: state.countries.filter((country) =>
+         country.name.common.toLowerCase().match(action.payload.toLowerCase()))
+      }
     }
   },
   extraReducers: (builder) => {
     builder.addCase(getCountries.pending, (state) => {
-      state.status = 'loading';
+      state.pending = true;
     })
     builder.addCase(getCountries.fulfilled, (state, action) => {
-      state.status = 'idle';
+      state.pending = false;
       state.countries = action.payload;
     })
-    builder.addCase(getCountries.rejected, (state) => {
-      state.status = 'failed';
+    builder.addCase(getCountries.rejected, (state, action) => {
+      state.error = action.error.message ? action.error.message : 'Something went wrong..';
+      state.pending = false;
+      state.countries = [];
     })
   },
 })
@@ -53,5 +67,8 @@ export const countriesSlice = createSlice({
 export const { search } = countriesSlice.actions;
 
 export const selectCountries = (state: RootState) => state.countries.countries;
+export const selectPending = (state: RootState) => state.countries.pending;
+export const selectError = (state: RootState) => state.countries.error;
+export const selectSearch = (state: RootState) => state.countries.search;
 
 export default countriesSlice.reducer;
