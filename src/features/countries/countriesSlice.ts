@@ -28,7 +28,7 @@ const fetchCountries = async (endpoint: string) => {
 
 export const getCountries = createAsyncThunk(
   'countries/getCountries',
-  async (endpoint:string) => {
+  async (endpoint: string) => {
     const response = await fetchCountries(endpoint);
     return response.data;
   }
@@ -50,15 +50,32 @@ export const countriesSlice = createSlice({
       return {
         ...state,
         search: state.countries.filter((country) =>
-         country.name.common.toLowerCase().match(action.payload.toLowerCase()))
+          country.name.common.toLowerCase().match(action.payload.toLowerCase()))
       }
     },
-    saveCountry: (state, action) => {
+    saveCountry: (state, action: SavedType): any => {
       const foundCountry = state.saved.find((country) => country.name.common === action.payload.name.common);
-      if(foundCountry){
-        state.saved = state.saved.filter((country) => country.name.common !== action.payload.name.common);
+      if (foundCountry) {
+        state.saved = state.saved.filter((country) => country.name.common !== foundCountry.name.common);
       } else {
-        state.saved.push(action.payload);
+        const savedCountry = { ...action.payload, isSaved: true }
+
+        const updatedCountries = state.countries.map((country) => {
+          if (country.name.common === savedCountry.name.common)
+            return { ...country, isSaved: true }
+          else return country;
+        })
+        const updatedSearch = state.search.map((country) => {
+          if (country.name.common === savedCountry.name.common)
+            return { ...country, isSaved: true }
+          else return country;
+        })
+        return {
+          ...state,
+          saved: [...state.saved, savedCountry],
+          countries: updatedCountries,
+          search: updatedSearch,
+        }
       }
     }
   },

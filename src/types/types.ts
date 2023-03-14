@@ -1,3 +1,5 @@
+import { StringLiteral } from "typescript";
+
 export interface Country {
   name:         Name;
   tld?:         string[];
@@ -34,6 +36,7 @@ export interface Country {
   startOfWeek:  StartOfWeek;
   capitalInfo:  CapitalInfo;
   postalCode?:  PostalCode;
+  isSaved?: boolean;
 }
 
 export interface CapitalInfo {
