@@ -6,26 +6,29 @@ import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody
 
 import { Country } from '../../types/types';
 
+import orderBy from 'lodash/orderBy';
+
 import { GoHeart } from 'react-icons/go';
 import { SlArrowRight } from 'react-icons/sl';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
-import { saveCountry, selectSaved } from '../../features/countries/countriesSlice';
+import { HiOutlineArrowSmUp, HiOutlineArrowSmDown } from 'react-icons/hi'
+import { useAppDispatch } from '../../app/hooks';
+import { saveCountry } from '../../features/countries/countriesSlice';
 
 type TableProps = {
   countries: Country[],
 }
 
+type SortDirection = 'asc' | 'desc';
+
 const CountriesTable = (props: TableProps) => {
   const { countries } = props;
-
-  const saved = useAppSelector(selectSaved);
+  const [sortColumn, setSortColumn] = useState<string>('');
+  const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
 
   const dispatch = useAppDispatch();
 
-  // const [isSaved, setIsSaved] = useState<string>('');
-
   // to create a list of languages out of object
-  const objectToList = (object: Object) => {
+  const langObjectToList = (object: Object) => {
     const values = Object.values(object);
     return (
       <ul aria-label='list of languages'>
@@ -34,19 +37,34 @@ const CountriesTable = (props: TableProps) => {
     );
   }
 
-  // const isSaved = (currentCountry: Country): string=> {
-  //   console.log('isSaved ran')
-  //   const found = saved.find((country) => country.name.common === currentCountry.name.common);
-  //   return found ? 'saved' : '';
-  // }
-
-  const handleSaved = (event: React.MouseEvent<SVGElement, MouseEvent>, country: Country) => {
+  const handleSaved = (country: Country) => {
     dispatch(saveCountry(country));
-    // event.currentTarget.classList.contains('saved') ?
-    //   event.currentTarget.classList.remove('saved') :
-    //   event.currentTarget.classList.add('saved');
-    // setIsSaved('saved')
   }
+
+  const invertDirection: { asc: SortDirection, desc: SortDirection } = {
+    asc: 'desc',
+    desc: 'asc',
+  }
+
+  const handleSort = (event: React.MouseEvent<HTMLTableCellElement, MouseEvent>) => {
+    const sortParam = event.currentTarget.innerText.toLowerCase();
+    setSortColumn(sortParam === 'name' ? 'name.common' : sortParam);
+    setSortDirection(sortDirection ? invertDirection[sortDirection] : 'desc');
+  }
+
+  const headersToSort = ['name.common', 'Region', 'Population'];
+
+  const sortedHeaders = headersToSort.map((header, index) =>
+    <TableCell key={index} width='15%' onClick={handleSort} sx={{ '&:hover': { 'cursor': 'pointer' } }}>
+      {sortColumn === header.toLowerCase() &&
+        <>
+          {sortDirection === 'desc' ? <HiOutlineArrowSmDown /> : <HiOutlineArrowSmUp />}
+        </>
+      }
+      <span>{header !== 'name.common' ? header : 'Name'}</span>
+    </TableCell>
+  )
+
 
   const countriesRows = (array: Country[]) => array.map((country: Country, index: number) => (
     <TableRow key={index}>
@@ -54,8 +72,8 @@ const CountriesTable = (props: TableProps) => {
       <TableCell>{country.name.common}</TableCell>
       <TableCell>{country.region}</TableCell>
       <TableCell>{country.population}</TableCell>
-      <TableCell>{country.languages ? objectToList(country.languages) : ''}</TableCell>
-      <TableCell><GoHeart className={`icon heart-icon ${country.isSaved && 'saved'}`} onClick={(event) => handleSaved(event, country)}></GoHeart></TableCell>
+      <TableCell>{country.languages ? langObjectToList(country.languages) : ''}</TableCell>
+      <TableCell><GoHeart className={`icon heart-icon ${country.isSaved && 'saved'}`} onClick={() => handleSaved(country)}></GoHeart></TableCell>
       <TableCell><Link to='/country' state={country.name.common}><SlArrowRight className='icon arrow-icon'></SlArrowRight></Link></TableCell>
     </TableRow>
   ));
@@ -66,17 +84,14 @@ const CountriesTable = (props: TableProps) => {
         <TableHead>
           <TableRow>
             <TableCell width='15%'>Flag</TableCell>
-            <TableCell width='15%'>Name</TableCell>
-            <TableCell width='15%'>Region</TableCell>
-            <TableCell width='15%'>Population</TableCell>
+            {sortedHeaders}
             <TableCell width='15%'>Languages</TableCell>
             <TableCell width='5%'></TableCell>
             <TableCell width='5%'></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {countriesRows(countries)}
-          {/* {countriesRows(searchInput.length > 0 ? searchResults : countries)} */}
+          {countriesRows(orderBy(countries, sortColumn, sortDirection))}
         </TableBody>
       </Table>
     </TableContainer>
