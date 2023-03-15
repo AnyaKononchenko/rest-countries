@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 
-import { Link } from 'react-router-dom';
-
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
-import TablePagination from '@mui/material/TablePagination';
-
-import { Country } from '../../types/types';
-
 import orderBy from 'lodash/orderBy';
-
+import { Link } from 'react-router-dom';
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TablePagination } from '@mui/material';
+import { Country } from '../../types/types';
 import { GoHeart } from 'react-icons/go';
 import { SlArrowRight } from 'react-icons/sl';
 import { HiOutlineArrowSmUp, HiOutlineArrowSmDown } from 'react-icons/hi'
 import { useAppDispatch } from '../../app/hooks';
 import { saveCountry } from '../../features/countries/countriesSlice';
-import { Container } from '@mui/system';
+
 
 type TableProps = {
   countries: Country[],
@@ -68,7 +63,6 @@ const CountriesTable = (props: TableProps) => {
       <span>{header !== 'name.common' ? header : 'Name'}</span>
     </TableCell>
   )
-
 
   const countriesRows = (array: Country[]) => array.map((country: Country, index: number) => (
     <TableRow key={index}>

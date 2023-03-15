@@ -7,7 +7,7 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { getCountries, selectCountries } from '../../features/countries/countriesSlice';
 import { ENDPOINTS } from '../../services/resources'; 
 import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowLeft, MdOutlineMoreVert, MdLocationPin } from 'react-icons/md'
-import { current } from '@reduxjs/toolkit';
+
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -19,9 +19,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 })(({ theme, expand }) => ({
   transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
   marginLeft: 'auto',
-  // transition: theme.transitions.create('transform', {
-  //   duration: theme.transitions.duration.shortest,
-  // }
 }),
 );
 
