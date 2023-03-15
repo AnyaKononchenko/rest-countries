@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
+import TablePagination from '@mui/material/TablePagination';
 
 import { Country } from '../../types/types';
 
@@ -13,6 +14,7 @@ import { SlArrowRight } from 'react-icons/sl';
 import { HiOutlineArrowSmUp, HiOutlineArrowSmDown } from 'react-icons/hi'
 import { useAppDispatch } from '../../app/hooks';
 import { saveCountry } from '../../features/countries/countriesSlice';
+import { Container } from '@mui/system';
 
 type TableProps = {
   countries: Country[],
@@ -24,6 +26,8 @@ const CountriesTable = (props: TableProps) => {
   const { countries } = props;
   const [sortColumn, setSortColumn] = useState<string>('');
   const [sortDirection, setSortDirection] = useState<SortDirection>('desc');
+  const [page, setPage] = useState<number>(0);
+  const [rowsPerPage, setRowsPerPage] = useState<number>(10);
 
   const dispatch = useAppDispatch();
 
@@ -78,23 +82,49 @@ const CountriesTable = (props: TableProps) => {
     </TableRow>
   ));
 
+  const handleChangePage = (
+    event: React.MouseEvent<HTMLButtonElement> | null,
+    newPage: number,
+  ) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
   return (
-    <TableContainer component={Paper}>
-      <Table aria-label='list of countries'>
-        <TableHead>
-          <TableRow>
-            <TableCell width='15%'>Flag</TableCell>
-            {sortedHeaders}
-            <TableCell width='15%'>Languages</TableCell>
-            <TableCell width='5%'></TableCell>
-            <TableCell width='5%'></TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {countriesRows(orderBy(countries, sortColumn, sortDirection))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer component={Paper}>
+        <Table aria-label='list of countries'>
+          <TableHead>
+            <TableRow>
+              <TableCell width='15%'>Flag</TableCell>
+              {sortedHeaders}
+              <TableCell width='15%'>Languages</TableCell>
+              <TableCell width='5%'></TableCell>
+              <TableCell width='5%'></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {countriesRows(orderBy(countries, sortColumn, sortDirection))
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)}
+          </TableBody>
+        </Table>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25, 50, 100, 200, 250]}
+          component="div"
+          count={countries.length}
+          page={page}
+          onPageChange={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </TableContainer>
+    </>
   )
 }
 
