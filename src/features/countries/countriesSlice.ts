@@ -62,12 +62,12 @@ export const countriesSlice = createSlice({
 
         const updatedCountries = state.countries.map((country) => {
           if (country.name.common === savedCountry.name.common)
-            return { ...country, isSaved: true }
+            return { ...country, ...savedCountry }
           else return country;
         })
         const updatedSearch = state.search.map((country) => {
           if (country.name.common === savedCountry.name.common)
-            return { ...country, isSaved: true }
+            return { ...country, ...savedCountry }
           else return country;
         })
         return {
@@ -85,7 +85,18 @@ export const countriesSlice = createSlice({
     })
     builder.addCase(getCountries.fulfilled, (state, action) => {
       state.pending = false;
-      state.countries = action.payload;
+      let fetched: Country[] = action.payload;
+      // updating state of countries in case there are saved countries
+      if (state.saved.length > 0) {
+        fetched = fetched.map((country) => {
+          const saved = state.saved.find((savedCountry) => savedCountry.name.common === country.name.common);
+          if (saved) {
+            country = { ...country, ...saved }
+          }
+          return country;
+        });
+      }
+      state.countries = fetched;
     })
     builder.addCase(getCountries.rejected, (state, action) => {
       state.error = action.error.message ? action.error.message : 'Something went wrong..';
