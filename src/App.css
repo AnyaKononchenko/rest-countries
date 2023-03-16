@@ -4,12 +4,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Nunito', sans-serif;
-}
-
-:root{
-  --header-color: #0D52BA;
-  --saved-color: #F50157;
 }
 
 button, a{
@@ -74,24 +68,6 @@ a:link, a:visited {
   border-radius: 10px;
   aspect-ratio: 3/2;
 }
-
-.heart-icon,
-.arrow-icon{
-  color: var(--header-color);
-}
-
-.heart-icon{
-  font-size: 1.5rem;
-}
-
-.arrow-icon{
-  font-size: 1.3rem;
-}
-
-.saved{
-  color: var(--saved-color);
-}
-
 
 .loading-icon{
   font-size: 2rem;

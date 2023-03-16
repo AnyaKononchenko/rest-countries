@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 
 import orderBy from 'lodash/orderBy';
 import { Link } from 'react-router-dom';
-import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, IconButton, Snackbar, Typography, makeStyles } from '@mui/material';
+import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, TablePagination, IconButton, Snackbar, Typography, useTheme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Country } from '../../types/types';
-import { GoHeart } from 'react-icons/go';
-import { SlArrowRight } from 'react-icons/sl';
+
 import { HiOutlineArrowSmUp, HiOutlineArrowSmDown } from 'react-icons/hi'
 import { useAppDispatch } from '../../app/hooks';
 import { updateSavedCountry } from '../../features/countries/countriesSlice';
-
-
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import CloseIcon from '@mui/icons-material/Close';
 
 type TableProps = {
   countries: Country[],
@@ -27,11 +27,9 @@ type TableState = {
 }
 
 
-
-
 const StyledTableHeader = styled(TableCell)(({ theme }) => ({
-  backgroundColor: theme.palette.primary.light,
-  color: theme.palette.primary.dark,
+  backgroundColor: theme.palette.mode === 'light' ? theme.palette.primary.light : theme.palette.primary.main,
+  color: theme.palette.mode === 'light' ? theme.palette.primary.dark : theme.palette.secondary.main,
   fontWeight: '600',
   fontSize: 16,
 }));
@@ -49,6 +47,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const CountriesTable = (props: TableProps) => {
   const { countries } = props;
+  const theme = useTheme();
 
   const [tableState, setTableState] = useState<TableState>({
     sortColumn: '',
@@ -97,7 +96,7 @@ const CountriesTable = (props: TableProps) => {
         color="inherit"
         onClick={handleClose}
       >
-        X
+        <CloseIcon />
       </IconButton>
     </React.Fragment>
   );
@@ -137,12 +136,22 @@ const CountriesTable = (props: TableProps) => {
       <TableCell>{country.population}</TableCell>
       <TableCell>{country.languages ? langObjectToList(country.languages) : ''}</TableCell>
       <TableCell>
-        <GoHeart
-          className={`icon heart-icon ${country.isSaved && 'saved'}`}
+        <FavoriteIcon
+          className='icon'
+          sx={{ color: country.isSaved ? 'custom.main' : 'primary.main' }}
           onClick={() => handleSaved(country)}>
-        </GoHeart>
+        </FavoriteIcon>
       </TableCell>
-      <TableCell><Link to='/country' state={country.name.common}><SlArrowRight className='icon arrow-icon'></SlArrowRight></Link></TableCell>
+      <TableCell>
+        <Link to='/country' state={country.name.common}>
+          <ArrowForwardIosIcon className='icon'
+            sx={{
+              color: theme.palette.mode === 'light' ? 'primary.main' : 'secondary.main',
+              fontSize: '2rem'
+            }}>
+          </ArrowForwardIosIcon>
+        </Link>
+      </TableCell>
     </StyledTableRow>
   ));
 
@@ -170,7 +179,7 @@ const CountriesTable = (props: TableProps) => {
     <>
       <TableContainer component={Paper}>
         <Table aria-label='list of countries'>
-          <TableHead sx={{ bgColor: 'primary.light' }}>
+          <TableHead>
             <TableRow>
               <StyledTableHeader width='15%'>Flag</StyledTableHeader>
               {sortedHeaders}

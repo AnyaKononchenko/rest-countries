@@ -2,8 +2,7 @@ import Navbar from './Navbar';
 import { IoMenuSharp } from 'react-icons/io5';
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 
-const Header = () => {
- 
+const Header = () => { 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
