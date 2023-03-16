@@ -1,17 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
 import { BASE_URL } from '../../services/resources';
+import { Country } from '../../types/countryType';
+import { CountriesState, SavedType, SearchType } from '../../types/slicerTypes';
 import axios from 'axios';
-import { Country } from '../../types/types';
 
-
-export interface CountriesState {
-  countries: Country[],
-  pending: boolean,
-  error: string,
-  search: Country[],
-  saved: Country[],
-}
 
 const initialState: CountriesState = {
   countries: [],
@@ -34,14 +27,6 @@ export const getCountries = createAsyncThunk(
   }
 )
 
-type SearchType = {
-  payload: string,
-}
-
-type SavedType = {
-  payload: Country,
-}
-
 export const countriesSlice = createSlice({
   name: 'countries',
   initialState,
@@ -53,7 +38,7 @@ export const countriesSlice = createSlice({
           country.name.common.toLowerCase().match(action.payload.toLowerCase()))
       }
     },
-    updateSavedCountry: (state, action: SavedType): any => { 
+    updateSavedCountry: (state, action: SavedType): any => {
       const foundCountry = state.saved.find((country) => country.name.common === action.payload.name.common);
       if (foundCountry) {
         state.saved = state.saved.filter((country) => country.name.common !== foundCountry.name.common);

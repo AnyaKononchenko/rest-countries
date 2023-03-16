@@ -1,5 +1,3 @@
-import { StringLiteral } from "typescript";
-
 export interface Country {
   name:         Name;
   tld?:         string[];

@@ -30,7 +30,7 @@ import {
   MdLocationPin,
 } from "react-icons/md";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Country } from "../../types/types";
+import { Country } from "../../types/countryType";
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -71,11 +71,11 @@ const CountryDetails = () => {
 
   const handleSaved = (country: Country) => {
     dispatch(updateSavedCountry(country));
-  }
+  };
 
   // TODO add more info to details AND consider edge cases AND structure better
   return (
-    <Box sx={{ minHeight: "82vh" }} className="country-details">
+    <Box sx={{ minHeight: "82vh" }} className='country-details'>
       <Card
         sx={{
           maxWidth: "45vw",
@@ -86,17 +86,17 @@ const CountryDetails = () => {
       >
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="country literal">
+            <Avatar sx={{ bgcolor: red[500] }} aria-label='country literal'>
               <CardMedia
-                component="img"
-                height="auto"
+                component='img'
+                height='auto'
                 image={country.coatOfArms.png}
-                alt="country symbol"
+                alt='country symbol'
               />
             </Avatar>
           }
           action={
-            <IconButton aria-label="settings">
+            <IconButton aria-label='settings'>
               <MdOutlineMoreVert />
             </IconButton>
           }
@@ -109,12 +109,12 @@ const CountryDetails = () => {
             width: "90%",
             m: "0 auto",
           }}
-          component="img"
+          component='img'
           image={country.flags.png}
           alt={country.flags.alt}
         />
         <CardContent>
-          <Typography variant="body2" color="text.primary" fontSize="1rem">
+          <Typography variant='body2' color='text.primary' fontSize='1rem'>
             This country belongs to {country.region}
             {country.subregion
               ? " and ".concat(country.subregion).concat(" sub-region")
@@ -128,15 +128,18 @@ const CountryDetails = () => {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="go back" onClick={() => navigation(-1)}>
+          <IconButton aria-label='go back' onClick={() => navigation(-1)}>
             <MdOutlineKeyboardArrowLeft />
           </IconButton>
-          <IconButton aria-label="location pin">
+          <IconButton aria-label='location pin'>
             <MdLocationPin />
           </IconButton>
-          <IconButton aria-label="favourite" onClick={() => handleSaved(country)}>
+          <IconButton
+            aria-label='favourite'
+            onClick={() => handleSaved(country)}
+          >
             <FavoriteIcon
-              className="icon"
+              className='icon'
               sx={{ color: country.isSaved ? "custom.main" : "primary.main" }}
             ></FavoriteIcon>
           </IconButton>
@@ -144,12 +147,12 @@ const CountryDetails = () => {
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
-            aria-label="show more"
+            aria-label='show more'
           >
             <MdOutlineKeyboardArrowDown />
           </ExpandMore>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse in={expanded} timeout='auto' unmountOnExit>
           <CardContent>
             <Typography paragraph>
               Official name: {country.name.official}

@@ -61,7 +61,6 @@ a:link, a:visited {
 }
 
 /* table */
-
 .country__flag{
   width: 60%;
   height: auto;
@@ -69,6 +68,7 @@ a:link, a:visited {
   aspect-ratio: 3/2;
 }
 
+/* loading */
 .loading-icon{
   font-size: 2rem;
   transition: all .5s ease-in-out;
