@@ -30,9 +30,40 @@ body{
   cursor: pointer;
 }
 
+
+/* nav */
+
+a:link, a:visited {
+  color: white;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.header__element:last-child{
+  width: 15%;
+  justify-content: space-between;
+}
+
+.links{
+  width: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 5rem;
+}
+
+.switch{
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  z-index: 1;
+}
+
+
 /* home */
 .countries-list{
   margin-top: 2rem;
+  padding: 0 1rem;
 }
 
 /* table */
@@ -61,11 +92,6 @@ body{
   color: var(--saved-color);
 }
 
-/* details page*/
-
-.country__card{
-  margin: 1rem auto;
-}
 
 .loading-icon{
   font-size: 2rem;

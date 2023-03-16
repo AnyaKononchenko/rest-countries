@@ -49,7 +49,7 @@ const CountryDetails = () => {
   // TODO add more info to details AND consider edge cases AND structure better
   return (
     <article className='country-details'>
-      <Card sx={{ maxWidth: "30vw" }} className='country__card'>
+      <Card sx={{ maxWidth: "30vw", m: '1rem auto' }} >
         <CardHeader
           avatar={
             <Avatar sx={{ bgcolor: red[500] }} aria-label="country literal">
@@ -78,7 +78,7 @@ const CountryDetails = () => {
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             This country belongs to {country.region}{country.subregion ? ' and '.concat(country.subregion).concat(' sub-region') : '.'}.
-            Located at the {country.latlng[0]}&deg;N and {country.latlng[1]}&deg;W, this country has
+            Located at the {country.latlng[0].toFixed(2)}&deg;N and {country.latlng[1].toFixed(2)}&deg;W, this country has
             population of {country.population}.{` `}
             {country.independent && country.name.common.concat(' is independent')}
             {country.unMember && ' and has UN Membership.'}
@@ -106,8 +106,8 @@ const CountryDetails = () => {
               Official name: {country.name.official}
             </Typography>
             <Typography paragraph>
-              Capital {country.capital} is located at {country.capitalInfo.latlng && country.capitalInfo.latlng[0]}&deg;N
-              and {country.capitalInfo.latlng && country.capitalInfo.latlng[1]}&deg;W.
+              Capital {country.capital} is located at {country.capitalInfo.latlng && country.capitalInfo.latlng[0].toFixed(2)}&deg;N
+              and {country.capitalInfo.latlng && country.capitalInfo.latlng[1].toFixed(2)}&deg;W.
             </Typography>
             <Typography paragraph>
               Total area of {country.name.common} is {country.area}. It has borders with {country.borders?.length} countries.

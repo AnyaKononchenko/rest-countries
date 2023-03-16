@@ -2,9 +2,6 @@ import Navbar from './Navbar';
 import { IoMenuSharp } from 'react-icons/io5';
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material';
 
-import './Header.css';
-
-
 const Header = () => {
  
   return (
@@ -22,7 +19,7 @@ const Header = () => {
           </IconButton>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            COUNTIES
+            COUNTRIES
           </Typography>
 
           <Navbar />

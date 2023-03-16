@@ -22,15 +22,51 @@ function App() {
     [],
   );
 
+  // const theme = React.useMemo(
+  //   () =>
+  //     createTheme({
+  //       palette: {
+  //         mode,
+  //       },
+  //     }),
+  //   [mode],
+  // );
   const theme = React.useMemo(
     () =>
       createTheme({
         palette: {
           mode,
+          primary: {
+            main: '#4a5759',
+            light: '#B0C4B1',
+          },
+          secondary: {
+            light: '#F7E1D7',
+            main: '#EDAFB8',
+            contrastText: 'black',
+          },
+          contrastThreshold: 3,
+          tonalOffset: 0.2,
         },
       }),
     [mode],
   );
+
+  const lightTheme = createTheme({
+    palette: {
+      mode: 'light',
+      primary: {
+        main: '#ff4400',
+      },
+      secondary: {
+        light: '#0066ff',
+        main: '#0044ff',
+        contrastText: '#ffcc00',
+      },
+      contrastThreshold: 3,
+      tonalOffset: 0.2,
+    },
+  });
 
   return (
     <ColorModeContext.Provider value={colorMode}>

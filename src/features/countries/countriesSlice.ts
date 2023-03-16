@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { RootState } from '../../app/store';
 import { BASE_URL } from '../../services/resources';
 import axios from 'axios';
@@ -53,29 +53,29 @@ export const countriesSlice = createSlice({
           country.name.common.toLowerCase().match(action.payload.toLowerCase()))
       }
     },
-    saveCountry: (state, action: SavedType): any => {
+    updateSavedCountry: (state, action: SavedType): any => { 
       const foundCountry = state.saved.find((country) => country.name.common === action.payload.name.common);
       if (foundCountry) {
         state.saved = state.saved.filter((country) => country.name.common !== foundCountry.name.common);
+        state.countries = state.countries
+          .map((country) => country.name.common === foundCountry.name.common
+            ? country = { ...country, isSaved: false }
+            : country)
+        state.search = state.search
+          .map((country) => country.name.common === foundCountry.name.common
+            ? country = { ...country, isSaved: false }
+            : country)
       } else {
         const savedCountry = { ...action.payload, isSaved: true }
-
-        const updatedCountries = state.countries.map((country) => {
-          if (country.name.common === savedCountry.name.common)
-            return { ...country, ...savedCountry }
-          else return country;
-        })
-        const updatedSearch = state.search.map((country) => {
-          if (country.name.common === savedCountry.name.common)
-            return { ...country, ...savedCountry }
-          else return country;
-        })
-        return {
-          ...state,
-          saved: [...state.saved, savedCountry],
-          countries: updatedCountries,
-          search: updatedSearch,
-        }
+        state.saved = [...state.saved, savedCountry];
+        state.countries = state.countries
+          .map((country) => country.name.common === savedCountry.name.common
+            ? country = { ...country, isSaved: true }
+            : country);
+        state.search = state.search
+          .map((country) => country.name.common === savedCountry.name.common
+            ? country = { ...country, isSaved: true }
+            : country)
       }
     }
   },
@@ -106,7 +106,7 @@ export const countriesSlice = createSlice({
   },
 })
 
-export const { search, saveCountry } = countriesSlice.actions;
+export const { search, updateSavedCountry } = countriesSlice.actions;
 
 export const selectCountries = (state: RootState) => state.countries.countries;
 export const selectPending = (state: RootState) => state.countries.pending;

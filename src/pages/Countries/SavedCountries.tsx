@@ -6,7 +6,7 @@ import { selectSaved } from '../../features/countries/countriesSlice'
 
 const SavedCountries = () => {
   const saved = useAppSelector(selectSaved);
-  console.log("saved", saved);
+
   return (
     <Box sx={{
       m: "1rem",
