@@ -28,7 +28,7 @@ body{
 /* nav */
 
 a:link, a:visited {
-  color: white;
+  color: inherit;
   font-size: 1.3rem;
   text-decoration: none;
 }
@@ -82,5 +82,7 @@ a:link, a:visited {
     transform: rotate(360deg);
   }
 }
+
+
 
 

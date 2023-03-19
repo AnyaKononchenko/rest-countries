@@ -166,8 +166,8 @@ const CountriesTable = (props: TableProps) => {
           />
         </TableCell>
         <TableCell>
-          <Link to='/country' state={country.name.common}>
-            <Typography variant='body2' color='primary'>
+          <Link to='/country' state={country.name.common} color='primary.main'>
+            <Typography variant='body2'>
               {country.name.common}
             </Typography>
           </Link>
@@ -180,7 +180,7 @@ const CountriesTable = (props: TableProps) => {
         <TableCell>
           <FavoriteIcon
             className='icon'
-            sx={{ color: country.isSaved ? "custom.main" : "primary.main" }}
+            sx={{ color: country.isSaved ? "custom.main" : "primary.light" }}
             onClick={() => handleSaved(country)}
           ></FavoriteIcon>
         </TableCell>
