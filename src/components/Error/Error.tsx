@@ -1,11 +1,7 @@
 import React from "react";
 import { Box, Typography } from "@mui/material";
 
-type ErrorType = {
-  message: string;
-};
-
-const Error = (props: ErrorType) => {
+const Error = (props: {message: string}) => {
   return (
     <Box
       sx={{

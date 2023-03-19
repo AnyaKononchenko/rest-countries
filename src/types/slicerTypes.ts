@@ -2,6 +2,7 @@ import { Country } from "./countryType";
 
 export interface CountriesState {
   countries: Country[],
+  countryDetails: Country[],
   pending: boolean,
   error: string,
   search: Country[],

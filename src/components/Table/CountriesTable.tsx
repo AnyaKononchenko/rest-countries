@@ -11,8 +11,6 @@ import {
   TableCell,
   TableBody,
   TablePagination,
-  IconButton,
-  Snackbar,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -24,8 +22,8 @@ import { useAppDispatch } from "../../app/hooks";
 import { updateSavedCountry } from "../../features/countries/countriesSlice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import CloseIcon from "@mui/icons-material/Close";
 import { SortDirection, TableProps, TableState } from "../../types/tableTypes";
+import FavMessage from "../PopUps/FavMessage";
 
 const StyledTableHeader = styled(TableCell)(({ theme }) => ({
   backgroundColor:
@@ -87,29 +85,6 @@ const CountriesTable = (props: TableProps) => {
 
     setOpen(true);
   };
-
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
-  const action = (
-    <React.Fragment>
-      <IconButton
-        size='small'
-        aria-label='close'
-        color='inherit'
-        onClick={handleClose}
-      >
-        <CloseIcon />
-      </IconButton>
-    </React.Fragment>
-  );
 
   const invertDirection: { asc: SortDirection; desc: SortDirection } = {
     asc: "desc",
@@ -257,14 +232,7 @@ const CountriesTable = (props: TableProps) => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </TableContainer>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={handleClose}
-        message={message}
-        action={action}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      />
+      <FavMessage open={open} message={message} setOpen={setOpen}/>
     </>
   );
 };

@@ -56,7 +56,7 @@ function App() {
               contrastText: "#2E3532",
             },
             custom: {
-              main: "#94849B",
+              main: "#A5385F",
             },
             contrastThreshold: 3,
             tonalOffset: 0.2,

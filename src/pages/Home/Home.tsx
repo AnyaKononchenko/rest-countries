@@ -61,7 +61,7 @@ const Home = () => {
           <Typography variant='body1' fontSize='1.3rem'>
             Do you want to see a distribution of countries?
           </Typography>
-          <Typography variant='body2' fontSize='1.3rem'>
+          <Typography variant='body2' fontSize='1.3rem' sx={{mb: '1rem'}}>
             Then choose one of the options:
           </Typography>
           <ToggleButtonGroup
