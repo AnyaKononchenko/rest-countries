@@ -39,11 +39,11 @@ a:link, a:visited {
 }
 
 .links{
-  width: 10%;
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  margin-right: 5rem;
+  justify-content: flex-start;
+  gap: 1rem;
 }
 
 .switch{

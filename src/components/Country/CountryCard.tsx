@@ -80,8 +80,13 @@ const CountryCard = (props: { country: Country }) => {
         <Box sx={{ minHeight: "82vh" }} className='country-details'>
           <Card
             sx={{
-              maxWidth: "45vw",
               m: "1rem auto",
+              width: {
+                lg: '45vw',
+                md: '55vw',
+                sm: "70vw",
+                xs: "90vw",
+              },
               bgcolor:
                 theme.palette.mode === "light"
                   ? "primary.light"

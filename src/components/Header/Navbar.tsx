@@ -1,10 +1,11 @@
 import React from "react";
 
-import { Badge } from "@mui/material";
-import { AiFillHome } from "react-icons/ai";
-import { GoHeart } from "react-icons/go";
-import { IoEarthOutline } from "react-icons/io5";
+import { Badge, Box } from "@mui/material";
 import { Link } from "react-router-dom";
+
+import CottageIcon from "@mui/icons-material/Cottage";
+import PublicIcon from "@mui/icons-material/Public";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { useAppSelector } from "../../app/hooks";
 import { selectSaved } from "../../features/countries/countriesSlice";
@@ -12,20 +13,49 @@ import { selectSaved } from "../../features/countries/countriesSlice";
 const Navbar = () => {
   const saved = useAppSelector(selectSaved);
   return (
-    <nav className='links'>
-      <Link to='/'>
-        <AiFillHome className='icon home-icon'></AiFillHome>
-      </Link>
-      <Link to='/countries'>
-        <IoEarthOutline className='icon earth-icon'></IoEarthOutline>
-      </Link>
-
-      <Badge badgeContent={saved.length} color='secondary'>
-        <Link to='/saved'>
-          <GoHeart className='icon saved-icon'></GoHeart>
+    <Box sx={{ width: { lg: "10%", md: "15%", sm: "100%", xs: "100%" }, mr: { lg: "3rem", md: "4rem", sm: "4rem", xs: ".5rem" } }}>
+      <nav className='links'>
+        <Link to='/'>
+          <CottageIcon
+            sx={{
+              fontSize: {
+                lg: "1.8rem",
+                md: "1.8rem",
+                sm: "2.1rem",
+                xs: "2.1rem",
+              },
+            }}
+          ></CottageIcon>
         </Link>
-      </Badge>
-    </nav>
+        <Link to='/countries'>
+          <PublicIcon
+            sx={{
+              fontSize: {
+                lg: "1.8rem",
+                md: "1.8rem",
+                sm: "2.1rem",
+                xs: "2.1rem",
+              },
+            }}
+          ></PublicIcon>
+        </Link>
+
+        <Badge badgeContent={saved.length} color='secondary'>
+          <Link to='/saved'>
+            <FavoriteIcon
+              sx={{
+                fontSize: {
+                  lg: "1.8rem",
+                  md: "1.8rem",
+                  sm: "2.1rem",
+                  xs: "2.1rem",
+                },
+              }}
+            ></FavoriteIcon>
+          </Link>
+        </Badge>
+      </nav>
+    </Box>
   );
 };
 

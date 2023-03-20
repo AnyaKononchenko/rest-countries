@@ -39,7 +39,7 @@ function App() {
               contrastText: "black",
             },
             custom: {
-              main: "#EDAFB8",
+              main: "#F8558F",
             },
             contrastThreshold: 3,
             tonalOffset: 0.2,

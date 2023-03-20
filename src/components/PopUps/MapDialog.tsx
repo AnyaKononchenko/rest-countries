@@ -29,9 +29,9 @@ const MapDialog = (props: {URL: string, open: boolean, setOpen: any }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Stay here</Button>
+        <Button onClick={handleClose} color='inherit'>Stay here</Button>
         <Link to={URL} target='_blank'>
-          <Button onClick={handleFollowPin} autoFocus>
+          <Button onClick={handleFollowPin} autoFocus color='inherit'>
             Go to Google Maps
           </Button>
         </Link>

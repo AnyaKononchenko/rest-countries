@@ -1,4 +1,4 @@
-# FRONT END PROJECT
+# FRONT END PROJECT  
 
 ![React](https://img.shields.io/badge/React-v.18-blue)
 ![Redux toolkit](https://img.shields.io/badge/Redux-v.1.9-purple)
@@ -64,3 +64,6 @@ ONLY DO THIS PART WHEN YOU HAVE COMPLETED THE REQUIREMENTS PART
 ![Country list](https://raw.githubusercontent.com/Andreaa-Dev/Country-list/master/src/images/allCountries.png)
 
 ![Country detail](https://raw.githubusercontent.com/Andreaa-Dev/Country-list/master/src/images/eachCountry.png)
+
+
+### Completed project: [link of deployment](https://rest-countries-anna.netlify.app)

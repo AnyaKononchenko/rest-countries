@@ -4,9 +4,28 @@ import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 
 const Header = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
-        <Toolbar>
+    <Box>
+      <AppBar
+        position='static'
+        sx={{
+          height: {
+            lg: "8vh",
+            md: "8vh",
+            sm: "10vh",
+            xs: "10vh",
+          },
+        }}
+      >
+        <Toolbar
+          sx={{
+            flexWrap: {
+              lg: "no-wrap",
+              md: "wrap",
+              sm: "wrap",
+              xs: "wrap",
+            },
+          }}
+        >
           <IconButton
             size='large'
             edge='start'

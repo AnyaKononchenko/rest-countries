@@ -101,7 +101,8 @@ const PieChart = (props: {
     labels: filtered.labels,
     datasets: [
       {
-        label: filterOption === 'population' ? 'population' : 'number of countries',
+        label:
+          filterOption === "population" ? "population" : "number of countries",
         data: filtered.data,
         backgroundColor: filtered.labels.map(() => randomColor(0.8)),
         borderWidth: 0,
@@ -131,7 +132,12 @@ const PieChart = (props: {
 
   return (
     <Box>
-      <Box sx={{ width: "50vw", height: "50vh" }}>
+      <Box
+        sx={{
+          width: { xs: "80vw", sm: "70vw", md: "50vw", lg: "30vw" },
+          height: { xs: "80vw", sm: "70vw", md: "50vw", lg: "30vw" },
+        }}
+      >
         <Pie data={data} options={options} />
       </Box>
       <Typography

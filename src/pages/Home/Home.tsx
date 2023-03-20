@@ -45,7 +45,8 @@ const Home = () => {
       {pending ? (
         <Loading />
       ) : (
-        <Box sx={{ minHeight: "82vh", position: "relative" }}>
+        <Box display='flex' flexDirection='column' alignItems='center'
+         sx={{ minHeight: "82vh", position: "relative" } }>
           <Typography
             variant='h2'
             fontSize='1.8rem'
@@ -59,14 +60,30 @@ const Home = () => {
             display='flex'
             alignItems='center'
             justifyContent='center'
-            sx={{ mt: "2rem" }}
+            width='100%'
+            minHeight='65vh'
+            sx={{
+              mt: "1rem",
+              flexDirection: {
+                lg: 'row',
+                md: 'row',
+                sm: "column",
+                xs: "column",
+              },
+              gap: {
+                lg: '3rem',
+                md: '2rem',
+                sm: "1rem",
+                xs: "1rem",
+              }
+            }}
           >
             <PieChart
               countries={countries}
               filterOption={filterOption}
             ></PieChart>
             <Box display='flex' alignItems='center' flexDirection='column'>
-              <Typography variant='body1' fontSize='1.3rem'>
+              <Typography variant='body1' fontSize='1.3rem' align='center'>
                 Do you want to see a distribution of countries?
               </Typography>
               <Typography variant='body2' fontSize='1.3rem' sx={{ mb: "1rem" }}>
@@ -94,10 +111,9 @@ const Home = () => {
           <Button
             sx={{
               p: "1rem",
-              position: "absolute",
-              bottom: "2rem",
-              left: "40%",
-              width: "20%",
+              m: "1rem 0",
+              width: "20rem",
+              alignSelf:'bottom',
             }}
             variant='contained'
             color='primary'
