@@ -97,7 +97,7 @@ export const HomeWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  minHeight: '82vh',
+  minHeight: '85vh',
   position: 'relative',
 }))
 
@@ -147,7 +147,7 @@ export const Handler = styled(Box)(({ theme }) => ({
   flexDirection: "column",
   alignItems: "center",
   justifyContent: "center",
-  minHeight: "84vh",
+  minHeight: "85vh",
 }))
 
 

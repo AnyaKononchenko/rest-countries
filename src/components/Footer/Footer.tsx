@@ -7,7 +7,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const Footer = () => {
   return (
-    <CustomFooter>
+    <CustomFooter role='footer'>
       <Typography variant='subtitle1'>
         &copy; Created by Anna Kononchenko
       </Typography>
