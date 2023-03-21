@@ -20,27 +20,35 @@ export default function IconMenu(props: {
 }) {
   const { open, anchorEl, handleClose } = props;
   const navigate = useNavigate();
+
+  const onMenuClick = (path: string) => {
+    navigate(path);
+    handleClose();
+  };
+
   return (
-    <Paper sx={{ width: '30vw', maxWidth: "100%", position: 'absolute' }}>
+    <Paper sx={{ width: "30vw", maxWidth: "100%", position: "absolute" }}>
       <Menu
         id='icon-menu'
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => navigate("/")}>
+        <MenuItem
+          onClick={() => onMenuClick('/')}
+        >
           <ListItemIcon>
             <CottageIcon fontSize='small' />
           </ListItemIcon>
           <ListItemText>Home</ListItemText>
         </MenuItem>
-        <MenuItem onClick={() => navigate("/countries")}>
+        <MenuItem onClick={() => onMenuClick("/countries")}>
           <ListItemIcon>
             <PublicIcon fontSize='small' />
           </ListItemIcon>
           <ListItemText>Countries</ListItemText>
         </MenuItem>
-        <MenuItem onClick={() => navigate("/saved")}>
+        <MenuItem onClick={() => onMenuClick("/saved")}>
           <ListItemIcon>
             <FavoriteIcon fontSize='small' />
           </ListItemIcon>
