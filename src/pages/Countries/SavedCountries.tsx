@@ -10,7 +10,7 @@ const SavedCountries = () => {
   return (
     <Box sx={{
       m: "1rem",
-      minHeight: "80vh",
+      minHeight: "84vh",
       }}>
       <Typography variant='h4' align='center' sx={{m: "1rem 0"}}>Browse The Countries You Saved</Typography>
       <>

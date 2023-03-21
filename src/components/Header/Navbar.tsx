@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Badge, Box } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Badge } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 import CottageIcon from "@mui/icons-material/Cottage";
 import PublicIcon from "@mui/icons-material/Public";
@@ -9,53 +9,57 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { useAppSelector } from "../../app/hooks";
 import { selectSaved } from "../../features/countries/countriesSlice";
+import { NavbarIcon, Navbar as CustomNavbar } from "../../styles/styles";
 
 const Navbar = () => {
   const saved = useAppSelector(selectSaved);
+  const navigate = useNavigate();
   return (
-    <Box sx={{ width: { lg: "10%", md: "15%", sm: "100%", xs: "100%" }, mr: { lg: "3rem", md: "4rem", sm: "4rem", xs: ".5rem" } }}>
-      <nav className='links'>
-        <Link to='/'>
-          <CottageIcon
-            sx={{
-              fontSize: {
-                lg: "1.8rem",
-                md: "1.8rem",
-                sm: "2.1rem",
-                xs: "2.1rem",
-              },
-            }}
-          ></CottageIcon>
-        </Link>
-        <Link to='/countries'>
-          <PublicIcon
-            sx={{
-              fontSize: {
-                lg: "1.8rem",
-                md: "1.8rem",
-                sm: "2.1rem",
-                xs: "2.1rem",
-              },
-            }}
-          ></PublicIcon>
-        </Link>
+    <CustomNavbar aria-label='navigation' role='navbar'>
+      <NavbarIcon
+        aria-label='go home'
+        onClick={() => navigate("/")}
+      >
+        <CottageIcon
+          sx={{
+            fontSize: "1.8rem",
+            color: "primary.light",
+          }}
+        ></CottageIcon>
+      </NavbarIcon>
 
+      <NavbarIcon
+        aria-label='go to countries list'
+        onClick={() => navigate("/countries")}
+      >
+        <PublicIcon
+          sx={{
+            fontSize: "1.8rem",
+            color: "primary.light",
+          }}
+        ></PublicIcon>
+      </NavbarIcon>
+
+      <NavbarIcon
+        aria-label='go to saved'
+        onClick={() => navigate("/saved")}
+      >
         <Badge badgeContent={saved.length} color='secondary'>
-          <Link to='/saved'>
-            <FavoriteIcon
-              sx={{
-                fontSize: {
-                  lg: "1.8rem",
-                  md: "1.8rem",
-                  sm: "2.1rem",
-                  xs: "2.1rem",
-                },
-              }}
-            ></FavoriteIcon>
-          </Link>
+          <FavoriteIcon
+            sx={{
+              fontSize: "1.8rem",
+              color: "primary.light",
+              display: {
+                lg: "block",
+                md: "block",
+                sm: "none",
+                xs: "none",
+              },
+            }}
+          ></FavoriteIcon>
         </Badge>
-      </nav>
-    </Box>
+      </NavbarIcon>
+    </CustomNavbar>
   );
 };
 

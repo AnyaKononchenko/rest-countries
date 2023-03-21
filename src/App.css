@@ -20,52 +20,10 @@ body{
   padding: .2rem;
 }
 
-.icon{
-  cursor: pointer;
-}
-
-
-/* nav */
-
 a:link, a:visited {
   color: inherit;
   font-size: 1.3rem;
   text-decoration: none;
-}
-
-.header__element:last-child{
-  width: 15%;
-  justify-content: space-between;
-}
-
-.links{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 1rem;
-}
-
-.switch{
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-  z-index: 1;
-}
-
-
-/* home */
-.countries-list{
-  margin-top: 2rem;
-  padding: 0 1rem;
-}
-
-/* table */
-.country__flag{
-  width: 60%;
-  height: auto;
-  border-radius: 10px;
-  aspect-ratio: 3/2;
 }
 
 /* loading */

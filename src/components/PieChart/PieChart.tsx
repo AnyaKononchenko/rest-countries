@@ -7,6 +7,8 @@ import { Country } from "../../types/countryType";
 import type { ChartData, ChartOptions } from "chart.js";
 import { FilterType } from "../../types/pieChartTypes";
 
+import { ChartWrapper } from '../../styles/styles';
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const filterBy = (countries: Country[], filter: FilterType) => {
@@ -132,14 +134,10 @@ const PieChart = (props: {
 
   return (
     <Box>
-      <Box
-        sx={{
-          width: { xs: "80vw", sm: "70vw", md: "50vw", lg: "30vw" },
-          height: { xs: "80vw", sm: "70vw", md: "50vw", lg: "30vw" },
-        }}
-      >
+      <ChartWrapper>
         <Pie data={data} options={options} />
-      </Box>
+      </ChartWrapper>
+      
       <Typography
         variant='body1'
         fontSize='1.2rem'

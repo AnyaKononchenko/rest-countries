@@ -1,23 +1,19 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
+import { Handler } from "../../styles/styles";
+import ErrorIcon from "@mui/icons-material/Error";
 
-const Error = (props: {message: string}) => {
+const Error = (props: { message: string }) => {
+  const theme = useTheme();
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "90vh",
-      }}
-    >
+    <Handler>
+      <ErrorIcon sx={{ fontSize: "3rem" }} />
       <Typography variant='h6'>An error occured -_-</Typography>
       <Typography
         variant='h6'
-        color='primary.main'
+        color={theme.palette.mode === 'light' ? 'primary.main' : 'secondary.main'}
       >{`<${props.message}>`}</Typography>
-    </Box>
+    </Handler>
   );
 };
 

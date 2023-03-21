@@ -1,21 +1,14 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { Handler } from "../../styles/styles";
 
 const Loading = () => {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "90vh",
-      }}
-    >
+    <Handler>
       <AiOutlineLoading3Quarters className='loading-icon' />
       <Typography variant='h6'>Loading..</Typography>
-    </Box>
+    </Handler>
   );
 };
 

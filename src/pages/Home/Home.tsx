@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Box,
   Button,
   ToggleButton,
   ToggleButtonGroup,
@@ -17,6 +16,7 @@ import { ENDPOINTS } from "../../services/resources";
 import { Error, Loading, PieChart } from "../../components";
 import { FilterType } from "../../types/pieChartTypes";
 import { useNavigate } from "react-router-dom";
+import { HomeContent, HomeWrapper, ControlsWrapper } from "../../styles/styles";
 
 const Home = () => {
   const countries = useAppSelector(selectCountries);
@@ -45,8 +45,7 @@ const Home = () => {
       {pending ? (
         <Loading />
       ) : (
-        <Box display='flex' flexDirection='column' alignItems='center'
-         sx={{ minHeight: "82vh", position: "relative" } }>
+        <HomeWrapper >
           <Typography
             variant='h2'
             fontSize='1.8rem'
@@ -56,37 +55,17 @@ const Home = () => {
           >
             Discover all Countries Of The World Here!
           </Typography>
-          <Box
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-            width='100%'
-            minHeight='65vh'
-            sx={{
-              mt: "1rem",
-              flexDirection: {
-                lg: 'row',
-                md: 'row',
-                sm: "column",
-                xs: "column",
-              },
-              gap: {
-                lg: '3rem',
-                md: '2rem',
-                sm: "1rem",
-                xs: "1rem",
-              }
-            }}
-          >
+          <HomeContent>
             <PieChart
               countries={countries}
               filterOption={filterOption}
             ></PieChart>
-            <Box display='flex' alignItems='center' flexDirection='column'>
+
+            <ControlsWrapper>
               <Typography variant='body1' fontSize='1.3rem' align='center'>
                 Do you want to see a distribution of countries?
               </Typography>
-              <Typography variant='body2' fontSize='1.3rem' sx={{ mb: "1rem" }}>
+              <Typography variant='body2' fontSize='1.3rem' sx={{ m: "1rem 0 .5rem 0" }} align='center'>
                 Then choose one of the options:
               </Typography>
               <ToggleButtonGroup
@@ -106,8 +85,8 @@ const Home = () => {
                 <ToggleButton value='independent'>Independence</ToggleButton>
                 <ToggleButton value='unMember'>UN Membership</ToggleButton>
               </ToggleButtonGroup>
-            </Box>
-          </Box>
+            </ControlsWrapper>
+          </HomeContent>
           <Button
             sx={{
               p: "1rem",
@@ -121,7 +100,7 @@ const Home = () => {
           >
             To the list of countries...
           </Button>
-        </Box>
+        </HomeWrapper>
       )}
     </>
   );

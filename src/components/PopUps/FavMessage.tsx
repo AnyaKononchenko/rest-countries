@@ -39,7 +39,7 @@ const FavMessage = (props: {
       onClose={handleClose}
       message={message}
       action={action}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
     />
   );
 };

@@ -13,44 +13,34 @@ import {
   TablePagination,
   Typography,
   useTheme,
+  CardMedia,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import { Country } from "../../types/countryType";
 
 import { HiOutlineArrowSmUp, HiOutlineArrowSmDown } from "react-icons/hi";
+
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+
 import { useAppDispatch } from "../../app/hooks";
 import { updateSavedCountry } from "../../features/countries/countriesSlice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { SortDirection, TableProps, TableState } from "../../types/tableTypes";
 import FavMessage from "../PopUps/FavMessage";
-
-const StyledTableHeader = styled(TableCell)(({ theme }) => ({
-  backgroundColor:
-    theme.palette.mode === "light"
-      ? theme.palette.primary.light
-      : theme.palette.primary.main,
-  color:
-    theme.palette.mode === "light"
-      ? theme.palette.primary.dark
-      : theme.palette.secondary.main,
-  fontWeight: "600",
-  fontSize: 16,
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+import {
+  StyledTableRow,
+  StyledTableHeader,
+  SortedHeaderContent,
+} from "../../styles/styles";
 
 const CountriesTable = (props: TableProps) => {
   const { countries } = props;
   const theme = useTheme();
+  const dispatch = useAppDispatch();
+
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<string>("");
 
   const [tableState, setTableState] = useState<TableState>({
     sortColumn: "",
@@ -58,11 +48,6 @@ const CountriesTable = (props: TableProps) => {
     page: 0,
     rowsPerPage: 10,
   });
-
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState<string>("");
-
-  const dispatch = useAppDispatch();
 
   // to create a list of languages out of object
   const langObjectToList = (object: Object) => {
@@ -113,16 +98,22 @@ const CountriesTable = (props: TableProps) => {
       onClick={handleSort}
       sx={{ "&:hover": { cursor: "pointer" } }}
     >
-      {tableState.sortColumn === header.toLowerCase() && (
-        <>
-          {tableState.sortDirection === "desc" ? (
-            <HiOutlineArrowSmDown />
-          ) : (
-            <HiOutlineArrowSmUp />
-          )}
-        </>
-      )}
-      {header !== "name.common" ? header : "Name"}
+      <SortedHeaderContent>
+        {tableState.sortColumn === header.toLowerCase() && (
+          <>
+            {tableState.sortDirection === "desc" ? (
+              <ArrowDropDownIcon
+                sx={{ m: { lg: "0", md: "0", sm: "0 auto", xs: "0 auto" } }}
+              />
+            ) : (
+              <ArrowDropUpIcon
+                sx={{ m: { lg: "0", md: "0", sm: "0 auto", xs: "0 auto" } }}
+              />
+            )}
+          </>
+        )}
+        {header !== "name.common" ? header : "Name"}
+      </SortedHeaderContent>
     </StyledTableHeader>
   ));
 
@@ -130,21 +121,29 @@ const CountriesTable = (props: TableProps) => {
     array.map((country: Country, index: number) => (
       <StyledTableRow key={index}>
         <TableCell>
-          <img
-            src={country.flags.png}
+          <CardMedia
+            component='img'
+            height='auto'
+            image={country.flags.png}
             alt={
               country.flags.alt
                 ? country.flags.alt
                 : `${country.name.common} flag`
             }
-            className='country__flag'
+            sx={{
+              borderRadius: {
+                lg: "10px",
+                md: "8px",
+                sm: "5px",
+                xs: "1px",
+              },
+              aspectRatio: "3/2",
+            }}
           />
         </TableCell>
         <TableCell>
           <Link to='/country' state={country.name.common} color='primary.main'>
-            <Typography variant='body2'>
-              {country.name.common}
-            </Typography>
+            <Typography variant='body2'>{country.name.common}</Typography>
           </Link>
         </TableCell>
         <TableCell>{country.region}</TableCell>
@@ -232,7 +231,7 @@ const CountriesTable = (props: TableProps) => {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </TableContainer>
-      <FavMessage open={open} message={message} setOpen={setOpen}/>
+      <FavMessage open={open} message={message} setOpen={setOpen} />
     </>
   );
 };

@@ -1,43 +1,27 @@
 import React from "react";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
-import { AiFillLinkedin, AiFillGithub } from "react-icons/ai";
+import { Links, Footer as CustomFooter } from "../../styles/styles";
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const Footer = () => {
   return (
-    <Box
-      display='flex'
-      justifyContent='center'
-      alignItems='center'
-      gap='1rem'
-      height='8vh'
-      sx={{
-        flexDirection: {
-          lg: "row",
-          md: "row",
-          sm: "row",
-          xs: "column",
-        },
-      }}
-    >
+    <CustomFooter>
       <Typography variant='subtitle1'>
         &copy; Created by Anna Kononchenko
       </Typography>
 
-      <Box display='flex'>
+      <Links>
         <Link to='https://github.com/AnyaKononchenko' target='_blank'>
-          <Typography variant='subtitle1' color='primary'>
-            <AiFillGithub fontSize='1.5rem' />
-          </Typography>
+          <GitHubIcon color='primary'/>
         </Link>
 
         <Link to='http://www.linkedin.com/in/anna-kononchenko' target='_blank'>
-          <Typography variant='subtitle1' color='primary'>
-            <AiFillLinkedin fontSize='1.5rem' />
-          </Typography>
+          <LinkedInIcon color='primary'/>
         </Link>
-      </Box>
-    </Box>
+      </Links>
+    </CustomFooter>
   );
 };
 

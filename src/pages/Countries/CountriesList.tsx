@@ -15,6 +15,7 @@ import TextField from "@mui/material/TextField";
 import { ENDPOINTS } from "../../services/resources";
 
 import { Loading, Error, CountriesTable } from "../../components";
+import { Box } from "@mui/material";
 
 const CountriesList = () => {
   const countries = useAppSelector(selectCountries);
@@ -43,7 +44,7 @@ const CountriesList = () => {
       {pending ? (
         <Loading />
       ) : (
-        <section className='countries-list'>
+        <Box sx={{mt: '2rem', p: '0 1rem 1rem 1rem'}}>
           <TextField
             id='search'
             label='Search here'
@@ -55,7 +56,7 @@ const CountriesList = () => {
           <CountriesTable
             countries={searchInput.length > 0 ? searchResults : countries}
           />
-        </section>
+        </Box>
       )}
     </>
   );

@@ -8,11 +8,12 @@ import { Home, NotFound, CountriesList, CountryDetails, SavedCountries } from '.
 const Routes = require("react-router-dom").Routes;
 const Route = require("react-router-dom").Route;
 
-const Index = () => {
+const Index = (props: {colorMode: any}) => {
+  const {colorMode} = props;
   return (
     <div className='page-content'>
       <Router>
-        <Header></Header>
+        <Header colorMode={colorMode}></Header>
         <main>
           <Routes>
             <Route path='/' element={<Home></Home>} />

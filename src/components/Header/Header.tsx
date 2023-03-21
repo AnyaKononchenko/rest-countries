@@ -1,46 +1,72 @@
+import React from "react";
 import Navbar from "./Navbar";
-import { IoMenuSharp } from "react-icons/io5";
-import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+import MenuOpenRoundedIcon from "@mui/icons-material/MenuOpenRounded";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import Switch from "@mui/material/Switch";
+import FormGroup from "@mui/material/FormGroup";
+import IconMenu from "./IconMenu";
+import {MenuButton} from '../../styles/styles';
+import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = (props: { colorMode: any }) => {
+  const { colorMode } = props;
+  const navigate = useNavigate();
+
+  const [mode, setMode] = React.useState<"light" | "dark">("light");
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleChange = () => {
+    setMode(mode === "light" ? "dark" : "light");
+    colorMode.toggleColorMode();
+  };
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box>
       <AppBar
         position='static'
         sx={{
-          height: {
-            lg: "8vh",
-            md: "8vh",
-            sm: "10vh",
-            xs: "10vh",
-          },
+          minHeight: "6vh",
         }}
       >
-        <Toolbar
-          sx={{
-            flexWrap: {
-              lg: "no-wrap",
-              md: "wrap",
-              sm: "wrap",
-              xs: "wrap",
-            },
-          }}
-        >
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
+        <Toolbar>
+          <MenuButton
             aria-label='menu'
-            sx={{ mr: 2 }}
+            aria-controls={open ? "icon-menu" : undefined}
+            aria-haspopup='true'
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
           >
-            <IoMenuSharp />
-          </IconButton>
+            <MenuOpenRoundedIcon sx={{ fontSize: "1.8rem" }} />
+          </MenuButton>
 
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
+          <IconMenu
+            open={open}
+            anchorEl={anchorEl}
+            handleClose={handleClose}
+          ></IconMenu>
+
+          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }} onClick={() => navigate('/')}>
             COUNTRIES
           </Typography>
 
           <Navbar />
+
+          <FormGroup className='switch'>
+            <Switch
+              checked={mode === "light" ? false : true}
+              onChange={handleChange}
+              color={"secondary"}
+              aria-label='theme switch'
+            />
+          </FormGroup>
         </Toolbar>
       </AppBar>
     </Box>
