@@ -151,7 +151,7 @@ const CountriesTable = (props: TableProps) => {
         </TableCell>
         <TableCell>
           <FavoriteIcon
-            className='icon'
+            className='cursor-pointer'
             sx={{ color: country.isSaved ? "custom.main" : "primary.light" }}
             onClick={() => handleSaved(country)}
           ></FavoriteIcon>
@@ -199,7 +199,7 @@ const CountriesTable = (props: TableProps) => {
         <Table aria-label='list of countries'>
           <TableHead>
             <TableRow>
-              <StyledTableHeader width='15%'>Flag</StyledTableHeader>
+              <StyledTableHeader width='12%'>Flag</StyledTableHeader>
               {sortedHeaders}
               <StyledTableHeader width='15%'>Languages</StyledTableHeader>
               <StyledTableHeader width='5%'></StyledTableHeader>

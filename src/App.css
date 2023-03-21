@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-button, a{
+button, a, .cursor-pointer{
   cursor: pointer;
 }
 
