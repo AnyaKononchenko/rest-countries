@@ -17,8 +17,6 @@ import {
 } from "@mui/material";
 import { Country } from "../../types/countryType";
 
-import { HiOutlineArrowSmUp, HiOutlineArrowSmDown } from "react-icons/hi";
-
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
 
