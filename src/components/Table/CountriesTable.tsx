@@ -207,16 +207,24 @@ const CountriesTable = (props: TableProps) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {countriesRows(
-              orderBy(
-                countries,
-                tableState.sortColumn,
-                tableState.sortDirection
+            {
+              countries.length > 0 
+              ? countriesRows(
+                orderBy(
+                  countries,
+                  tableState.sortColumn,
+                  tableState.sortDirection
+                )
+              ).slice(
+                tableState.page * tableState.rowsPerPage,
+                tableState.page * tableState.rowsPerPage + tableState.rowsPerPage
               )
-            ).slice(
-              tableState.page * tableState.rowsPerPage,
-              tableState.page * tableState.rowsPerPage + tableState.rowsPerPage
-            )}
+              : <TableRow>
+                <TableCell align='center' colSpan={7}>
+                  <Typography align='center' fontSize="1.5rem">There is no such country</Typography>
+                </TableCell>
+              </TableRow>
+            }
           </TableBody>
         </Table>
         <TablePagination
